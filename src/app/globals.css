@@ -1,0 +1,343 @@
+@import "tailwindcss";
+
+:root {
+  /* Midnight ground — a deep cool navy. The shop after dark, lit by one clean
+     blade of light. Far from the oxblood tattoo sibling on the same avenue. */
+  --void: #060a16;
+  --bg: #0a1022;
+  --panel: #0e162e;
+  --panel-2: #131d3b;
+  --steel: #1b2748;
+
+  /* Cool type */
+  --ink: #eef2fb;
+  --ink-soft: #aeb8d4;
+  --muted: #6f7b9c;
+
+  /* The one bright blade — ice-blue. The only chroma the layout adds; warmth
+     comes from the photography. Used for the mark, the record, the CTA. */
+  --accent: #4ea6ff;
+  --accent-hi: #9bd6ff;
+  --accent-deep: #2f6fbf;
+  --accent-glow: rgba(78, 166, 255, 0.22);
+  --accent-dim: rgba(78, 166, 255, 0.1);
+
+  --border: rgba(238, 242, 251, 0.1);
+  --border-strong: rgba(238, 242, 251, 0.2);
+
+  --font-display: var(--font-display), "Arial Narrow", sans-serif;
+  --font-body: var(--font-body), system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, "SF Mono", monospace;
+
+  --maxw: 1240px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* overflow-x: clip (not hidden) keeps horizontal scroll dead without making
+   the body a scroll container (DESIGN_LESSONS 06-03). */
+html {
+  scroll-behavior: auto;
+  background: var(--bg);
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.55;
+}
+
+/* faint vertical hairlines — like the parallel lanes of a fresh fade, low key */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.014) 0px,
+    rgba(255, 255, 255, 0.014) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--void);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ------------------------------------------------------------------ type --- */
+.display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.kicker::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ----------------------------------------------------------------- layout --- */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 5vw, 3rem);
+}
+
+.section {
+  position: relative;
+  z-index: 2;
+  padding-block: clamp(4.5rem, 11vw, 9rem);
+}
+
+.hr {
+  height: 1px;
+  background: var(--border);
+  border: 0;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------- buttons --- */
+/* @layer components so `hidden` / `sm:flex` utilities can still override these
+   display values (DESIGN_LESSONS 06-03, Tailwind v4 layering). */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 50px;
+    padding: 0 1.5rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease,
+      border-color 0.25s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--void);
+  }
+  .btn-primary:hover {
+    background: var(--accent-hi);
+    transform: translateY(-2px);
+  }
+  .btn-ghost {
+    border-color: var(--border-strong);
+    color: var(--ink);
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent-hi);
+    transform: translateY(-2px);
+  }
+}
+
+/* ------------------------------------------------------------------- nav --- */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(8, 12, 26, 0.78);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--border);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-size: clamp(0.92rem, 4vw, 1.04rem);
+  white-space: nowrap;
+}
+/* On mobile the fixed bottom bar carries Book + Call, so the nav CTA is
+   redundant and would crowd the wordmark. Unlayered rule beats the layered
+   .btn display (Tailwind v4 layering, DESIGN_LESSONS 06-03). */
+.nav .nav-book {
+  display: none;
+}
+@media (min-width: 880px) {
+  .nav .nav-book {
+    display: inline-flex;
+  }
+}
+.wordmark .dot {
+  color: var(--accent);
+}
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: color 0.2s ease;
+}
+.nav-links a:hover {
+  color: var(--accent-hi);
+}
+@media (min-width: 880px) {
+  .nav-links {
+    display: flex;
+  }
+}
+
+/* ------------------------------------------------------------- reveals --- */
+/* Visible by DEFAULT, ALWAYS. The rise-in is a pure CSS animation that runs
+   only when <html> is armed (the inline beforeInteractive script adds
+   `reveal-armed` when the tab is visible + motion allowed). Because the
+   animation uses fill `both` and ALWAYS ends at the visible frame, content can
+   never be stranded invisible even if React/JS never runs — this is the fix
+   for the blank-hero bug where visibility depended on a JS-added `.in` class
+   (DESIGN_LESSONS 06-08). Not armed (reduced motion or a tab that loaded in the
+   background) means no animation at all, so content is simply visible. */
+.reveal-armed .reveal {
+  animation: revealRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes revealRise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-armed .reveal {
+    animation: none;
+  }
+}
+/* Safety net: the inline script adds this 2.5s after load, no matter what, so
+   content is forced visible even if an animation was paused (backgrounded tab)
+   or anything else went wrong. Pure CSS + inline script, no React dependency. */
+.reveal-done .reveal {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ----------------------------------------------------------------- image --- */
+/* one cool grade unifies the warm + neutral stock into a single midnight brand */
+.framed {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  background: var(--panel);
+}
+.framed img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.82) contrast(1.04) brightness(0.92);
+}
+.framed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 16, 34, 0.1) 0%,
+    rgba(10, 16, 34, 0.04) 40%,
+    rgba(10, 16, 34, 0.5) 100%
+  );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.framed.tint::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--accent);
+  opacity: 0.07;
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------- map --- */
+.map-embed {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(1) invert(0.92) hue-rotate(180deg) saturate(0.7) contrast(0.95);
+}
+
+/* ------------------------------------------------------------ a11y --- */
+:focus-visible {
+  outline: 2px solid var(--accent-hi);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
