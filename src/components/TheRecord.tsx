@@ -160,8 +160,8 @@ export default function TheRecord() {
           {fine && (
             <div ref={cursorRef} className="rec-cursor" aria-hidden="true">
               <svg width="40" height="22" viewBox="0 0 40 22" fill="none">
-                <rect x="1" y="6" width="26" height="12" rx="2" fill="#9bd6ff" />
-                <path d="M27 8 h10 M27 11 h11 M27 14 h10" stroke="#9bd6ff" strokeWidth="1.4" />
+                <rect x="1" y="6" width="26" height="12" rx="2" fill="#f0c578" />
+                <path d="M27 8 h10 M27 11 h11 M27 14 h10" stroke="#f0c578" strokeWidth="1.4" />
               </svg>
             </div>
           )}
@@ -187,14 +187,14 @@ export default function TheRecord() {
       <style>{`
         .rec {
           background:
-            radial-gradient(80% 50% at 50% 0%, rgba(78,166,255,0.08), transparent 60%),
-            var(--bg);
+            radial-gradient(80% 50% at 50% 0%, rgba(210,154,63,0.08), transparent 60%),
+            var(--panel);
           border-top: 1px solid var(--border);
           border-bottom: 1px solid var(--border);
         }
         .rec-head { display: grid; gap: 1.2rem; margin: 1.4rem 0 2.6rem; }
         .rec-title { font-size: clamp(2.1rem, 6.5vw, 4.2rem); }
-        .rec-title .hl { color: var(--accent); }
+        .rec-title .hl { color: var(--brass); }
         .rec-lede { color: var(--ink-soft); max-width: 40rem; font-size: clamp(0.98rem, 2.4vw, 1.1rem); }
         @media (min-width: 900px) { .rec-head { grid-template-columns: 1fr 1fr; align-items: end; } }
 
@@ -203,7 +203,7 @@ export default function TheRecord() {
         .rec-readout { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 1rem; }
         .rec-count {
           font-family: var(--font-display); font-weight: 600;
-          font-size: clamp(2.6rem, 9vw, 4.6rem); color: var(--accent-hi);
+          font-size: clamp(2.6rem, 9vw, 4.6rem); color: var(--brass-hi);
           line-height: 1; font-variant-numeric: tabular-nums;
         }
         .rec-of { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
@@ -214,21 +214,22 @@ export default function TheRecord() {
         }
         .rec-bar {
           flex: 1 1 0; min-width: 0; border-radius: 1px 1px 0 0;
-          background: var(--accent); opacity: 0.9;
+          background: linear-gradient(180deg, var(--brass-hi), var(--brass-deep));
+          opacity: 0.9;
           transform-origin: bottom; will-change: transform, opacity;
         }
         /* the clipper light */
         .rec-blade {
           position: absolute; top: -8px; bottom: 0; left: 50%;
           width: 2px; margin-left: -1px; pointer-events: none; opacity: 0.5;
-          background: linear-gradient(180deg, var(--accent-hi), transparent);
-          box-shadow: 0 0 24px 8px var(--accent-glow);
+          background: linear-gradient(180deg, var(--brass-hi), transparent);
+          box-shadow: 0 0 24px 8px var(--brass-glow);
           transition: opacity 0.3s ease;
         }
         .rec-cursor {
           position: absolute; top: 0; left: 0; pointer-events: none; opacity: 0;
           margin: -11px 0 0 -14px; transition: opacity 0.25s ease;
-          filter: drop-shadow(0 0 10px var(--accent-glow));
+          filter: drop-shadow(0 0 10px var(--brass-glow));
         }
         .rec-baseline { height: 1px; background: var(--border-strong); width: 100%; }
         .rec-foot {
@@ -237,7 +238,7 @@ export default function TheRecord() {
         }
         .rec-rating { display: flex; align-items: baseline; gap: 0.7rem; }
         .rec-rating strong { font-family: var(--font-display); font-weight: 600; font-size: 2rem; color: var(--ink); }
-        .rec-stars { color: var(--accent); letter-spacing: 0.16em; font-size: 1.1rem; }
+        .rec-stars { color: var(--brass); letter-spacing: 0.16em; font-size: 1.1rem; }
         @media (prefers-reduced-motion: reduce) {
           .rec-bar { opacity: 1 !important; transform: none !important; }
           .rec-blade, .rec-cursor { display: none; }
