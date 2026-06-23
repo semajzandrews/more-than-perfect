@@ -3,7 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#0a1022",
+  themeColor: "#17100a",
   width: "device-width",
   initialScale: 1,
 };
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title:
     "More Than Perfect · Barber Shop in South Orange, NJ · 5.0 across 164 cuts",
   description:
-    "A barber shop on South Orange Avenue with a perfect record: 5.0 stars across 164 reviews. Fades, tapers, edge ups, shaves, afros and kids' cuts, seven days a week from six in the morning. Book the chair.",
+    "A barber shop on South Orange Avenue with a perfect record: 5.0 stars across 164 reviews. Fades, line ups, beards, hot towel shaves, afros and kids' cuts, seven days a week from six in the morning. Book the chair.",
   keywords: [
     "barber shop South Orange NJ",
     "fade haircut South Orange",
@@ -65,7 +65,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=switzer@400,500,600&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=tanker@400&f[]=general-sans@400,500,600,700&display=swap"
         />
         <link
           rel="stylesheet"
@@ -73,8 +73,8 @@ export default function RootLayout({
         />
         <style>{`
           :root {
-            --font-display: "Clash Display";
-            --font-body: "Switzer";
+            --font-display: "Tanker";
+            --font-body: "General Sans";
           }
         `}</style>
       </head>

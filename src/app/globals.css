@@ -1,29 +1,41 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   MORE THAN PERFECT — "THE BRASS STANDARD"
+   Redesign palette (06-23-2026). The owner rejected the old navy + ice-blue as
+   "basic" and said the hero "doesn't scream barbershop." This direction is the
+   opposite of basic: a warm, confident barbershop world — deep espresso leather,
+   real brass and amber gold, bone-cream type, a single barber-pole red accent.
+   Heritage barbershop, made premium. Nothing blue anywhere.
+   ========================================================================== */
+
 :root {
-  /* Midnight ground — a deep cool navy. The shop after dark, lit by one clean
-     blade of light. Far from the oxblood tattoo sibling on the same avenue. */
-  --void: #060a16;
-  --bg: #0a1022;
-  --panel: #0e162e;
-  --panel-2: #131d3b;
-  --steel: #1b2748;
+  /* Espresso + leather ground — the shop's wood, leather chairs, low warm light */
+  --void: #100a06;       /* deepest — footer, pole grooves */
+  --bg: #17100a;         /* page ground, warm near-black brown */
+  --panel: #1f160e;      /* raised leather panel */
+  --panel-2: #2a1d12;    /* warmer raised tone */
+  --leather: #3a2817;    /* mid leather, hairlines */
 
-  /* Cool type */
-  --ink: #eef2fb;
-  --ink-soft: #aeb8d4;
-  --muted: #6f7b9c;
+  /* Bone + cream type on the dark leather */
+  --ink: #f6ede0;        /* bone cream */
+  --ink-soft: #cdbba4;   /* aged paper */
+  --muted: #8c7a62;      /* faded gold-brown */
 
-  /* The one bright blade — ice-blue. The only chroma the layout adds; warmth
-     comes from the photography. Used for the mark, the record, the CTA. */
-  --accent: #4ea6ff;
-  --accent-hi: #9bd6ff;
-  --accent-deep: #2f6fbf;
-  --accent-glow: rgba(78, 166, 255, 0.22);
-  --accent-dim: rgba(78, 166, 255, 0.1);
+  /* THE BRASS — the signature chroma. Real brass/amber gold, lit warm. */
+  --brass: #d29a3f;      /* primary brass */
+  --brass-hi: #f0c578;   /* lit brass highlight */
+  --brass-deep: #a06f24; /* shadowed brass */
+  --brass-glow: rgba(210, 154, 63, 0.28);
+  --brass-dim: rgba(210, 154, 63, 0.12);
 
-  --border: rgba(238, 242, 251, 0.1);
-  --border-strong: rgba(238, 242, 251, 0.2);
+  /* The barber-pole red — used sparingly, the one true secondary */
+  --pole-red: #b3402f;
+  --pole-cream: #f4ead7;
+
+  --border: rgba(246, 237, 224, 0.1);
+  --border-strong: rgba(246, 237, 224, 0.2);
+  --brass-border: rgba(210, 154, 63, 0.35);
 
   --font-display: var(--font-display), "Arial Narrow", sans-serif;
   --font-body: var(--font-body), system-ui, sans-serif;
@@ -55,26 +67,21 @@ body {
   line-height: 1.55;
 }
 
-/* faint vertical hairlines — like the parallel lanes of a fresh fade, low key */
+/* warm low-light vignette + faint paper grain so the leather reads as material */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.014) 0px,
-    rgba(255, 255, 255, 0.014) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  opacity: 0.5;
-  mix-blend-mode: overlay;
+  background:
+    radial-gradient(120% 90% at 50% -10%, rgba(210, 154, 63, 0.05), transparent 55%),
+    radial-gradient(140% 120% at 50% 120%, rgba(0, 0, 0, 0.45), transparent 60%);
+  mix-blend-mode: normal;
 }
 
 ::selection {
-  background: var(--accent);
+  background: var(--brass);
   color: var(--void);
 }
 
@@ -93,7 +100,7 @@ img {
   font-family: var(--font-display);
   font-weight: 600;
   line-height: 0.94;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
 .kicker {
@@ -101,7 +108,7 @@ img {
   font-size: 0.72rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--brass);
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
@@ -110,12 +117,16 @@ img {
   content: "";
   width: 26px;
   height: 1px;
-  background: var(--accent);
+  background: var(--brass);
   display: inline-block;
 }
 
 .mono {
   font-family: var(--font-mono);
+}
+
+.hl {
+  color: var(--brass);
 }
 
 /* ----------------------------------------------------------------- layout --- */
@@ -149,32 +160,37 @@ img {
     justify-content: center;
     gap: 0.6rem;
     min-height: 50px;
-    padding: 0 1.5rem;
+    padding: 0 1.6rem;
     border-radius: 2px;
     font-family: var(--font-mono);
     font-size: 0.78rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease,
-      border-color 0.25s ease;
+      border-color 0.25s ease, box-shadow 0.25s ease;
     cursor: pointer;
     border: 1px solid transparent;
   }
+  /* brass plate button — reads like a polished nameplate */
   .btn-primary {
-    background: var(--accent);
+    background: linear-gradient(180deg, var(--brass-hi), var(--brass) 55%, var(--brass-deep));
     color: var(--void);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 6px 20px rgba(210, 154, 63, 0.18);
+    font-weight: 700;
   }
   .btn-primary:hover {
-    background: var(--accent-hi);
     transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45),
+      0 10px 30px rgba(210, 154, 63, 0.3);
   }
   .btn-ghost {
-    border-color: var(--border-strong);
+    border-color: var(--brass-border);
     color: var(--ink);
   }
   .btn-ghost:hover {
-    border-color: var(--accent);
-    color: var(--accent-hi);
+    border-color: var(--brass);
+    color: var(--brass-hi);
     transform: translateY(-2px);
   }
 }
@@ -188,9 +204,9 @@ img {
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(8, 12, 26, 0.78);
+  background: rgba(16, 10, 6, 0.82);
   backdrop-filter: blur(14px);
-  border-bottom-color: var(--border);
+  border-bottom-color: var(--brass-border);
 }
 .nav-inner {
   display: flex;
@@ -200,17 +216,17 @@ img {
 }
 .wordmark {
   display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-display);
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   font-size: clamp(0.92rem, 4vw, 1.04rem);
   white-space: nowrap;
+  color: var(--ink);
 }
 /* On mobile the fixed bottom bar carries Book + Call, so the nav CTA is
-   redundant and would crowd the wordmark. Unlayered rule beats the layered
-   .btn display (Tailwind v4 layering, DESIGN_LESSONS 06-03). */
+   redundant and would crowd the wordmark. */
 .nav .nav-book {
   display: none;
 }
@@ -220,7 +236,7 @@ img {
   }
 }
 .wordmark .dot {
-  color: var(--accent);
+  color: var(--brass);
 }
 .nav-links {
   display: none;
@@ -236,7 +252,7 @@ img {
   transition: color 0.2s ease;
 }
 .nav-links a:hover {
-  color: var(--accent-hi);
+  color: var(--brass-hi);
 }
 @media (min-width: 880px) {
   .nav-links {
@@ -245,14 +261,8 @@ img {
 }
 
 /* ------------------------------------------------------------- reveals --- */
-/* Visible by DEFAULT, ALWAYS. The rise-in is a pure CSS animation that runs
-   only when <html> is armed (the inline beforeInteractive script adds
-   `reveal-armed` when the tab is visible + motion allowed). Because the
-   animation uses fill `both` and ALWAYS ends at the visible frame, content can
-   never be stranded invisible even if React/JS never runs — this is the fix
-   for the blank-hero bug where visibility depended on a JS-added `.in` class
-   (DESIGN_LESSONS 06-08). Not armed (reduced motion or a tab that loaded in the
-   background) means no animation at all, so content is simply visible. */
+/* Visible by DEFAULT, ALWAYS. Pure-CSS rise-in armed by an inline script
+   (DESIGN_LESSONS 06-08) so content can never be stranded invisible. */
 .reveal-armed .reveal {
   animation: revealRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: var(--d, 0ms);
@@ -272,9 +282,6 @@ img {
     animation: none;
   }
 }
-/* Safety net: the inline script adds this 2.5s after load, no matter what, so
-   content is forced visible even if an animation was paused (backgrounded tab)
-   or anything else went wrong. Pure CSS + inline script, no React dependency. */
 .reveal-done .reveal {
   animation: none !important;
   opacity: 1 !important;
@@ -282,7 +289,7 @@ img {
 }
 
 /* ----------------------------------------------------------------- image --- */
-/* one cool grade unifies the warm + neutral stock into a single midnight brand */
+/* one warm grade unifies the stock into a single leather-and-amber brand */
 .framed {
   position: relative;
   overflow: hidden;
@@ -293,7 +300,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.82) contrast(1.04) brightness(0.92);
+  filter: saturate(1.02) contrast(1.05) brightness(0.94) sepia(0.12);
 }
 .framed::after {
   content: "";
@@ -301,11 +308,10 @@ img {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(10, 16, 34, 0.1) 0%,
-    rgba(10, 16, 34, 0.04) 40%,
-    rgba(10, 16, 34, 0.5) 100%
+    rgba(23, 16, 10, 0.06) 0%,
+    rgba(23, 16, 10, 0.02) 40%,
+    rgba(23, 16, 10, 0.55) 100%
   );
-  mix-blend-mode: multiply;
   pointer-events: none;
 }
 .framed.tint::before {
@@ -313,10 +319,26 @@ img {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: var(--accent);
-  opacity: 0.07;
-  mix-blend-mode: color;
+  background: var(--brass);
+  opacity: 0.06;
+  mix-blend-mode: overlay;
   pointer-events: none;
+}
+
+/* photo caption tag — brass-stamped */
+.photo-tag {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  z-index: 2;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--void);
+  background: var(--brass);
+  padding: 0.34rem 0.6rem;
+  border-radius: 2px;
+  font-weight: 700;
 }
 
 /* --------------------------------------------------------------- map --- */
@@ -324,12 +346,12 @@ img {
   width: 100%;
   height: 100%;
   border: 0;
-  filter: grayscale(1) invert(0.92) hue-rotate(180deg) saturate(0.7) contrast(0.95);
+  filter: grayscale(0.4) sepia(0.5) saturate(0.85) brightness(0.82) contrast(1.05);
 }
 
 /* ------------------------------------------------------------ a11y --- */
 :focus-visible {
-  outline: 2px solid var(--accent-hi);
+  outline: 2px solid var(--brass-hi);
   outline-offset: 3px;
 }
 
