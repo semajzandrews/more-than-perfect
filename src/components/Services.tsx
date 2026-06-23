@@ -108,7 +108,7 @@ export default function Services() {
           border-top: 1px solid var(--border);
         }
         .cut-row:last-child { border-bottom: 1px solid var(--border); }
-        .cut-n { color: var(--accent); font-size: 0.78rem; }
+        .cut-n { color: var(--brass); font-size: 0.78rem; }
         .cut-name {
           font-family: var(--font-display);
           font-weight: 600;

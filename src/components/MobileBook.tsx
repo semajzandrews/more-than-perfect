@@ -28,9 +28,9 @@ export default function MobileBook() {
           display: grid;
           grid-template-columns: 1fr 2fr;
           gap: 0;
-          background: rgba(8,12,26,0.9);
+          background: rgba(16,10,6,0.92);
           backdrop-filter: blur(14px);
-          border-top: 1px solid var(--border);
+          border-top: 1px solid var(--brass-border);
           padding: 0.6rem;
           padding-bottom: calc(0.6rem + env(safe-area-inset-bottom));
         }
@@ -45,8 +45,12 @@ export default function MobileBook() {
           text-transform: uppercase;
           border-radius: 2px;
         }
-        .mb-call { color: var(--ink); border: 1px solid var(--border-strong); margin-right: 0.5rem; }
-        .mb-book { background: var(--accent); color: var(--void); font-weight: 700; }
+        .mb-call { color: var(--ink); border: 1px solid var(--brass-border); margin-right: 0.5rem; }
+        .mb-book {
+          background: linear-gradient(180deg, var(--brass-hi), var(--brass) 55%, var(--brass-deep));
+          color: var(--void); font-weight: 700;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+        }
         @media (min-width: 880px) { .mobilebook { display: none; } }
       `}</style>
     </div>

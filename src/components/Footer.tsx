@@ -45,8 +45,15 @@ export default function Footer() {
       </div>
 
       <div className="wrap footer-base">
-        <span className="mono">More Than Perfect Barber Shop</span>
-        <span className="mono">South Orange, New Jersey</span>
+        <span className="mono">More Than Perfect Barber Shop · South Orange, NJ</span>
+        <a
+          className="mono built-by"
+          href="https://bysemaj.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Built by <span className="bb-mark">bysemaj.com</span>
+        </a>
       </div>
 
       <style>{`
@@ -62,7 +69,11 @@ export default function Footer() {
           grid-template-columns: 1fr;
           gap: 2.4rem;
         }
-        .footer-line { color: var(--accent); margin: 0.9rem 0 0; font-size: 0.78rem; letter-spacing: 0.1em; }
+        .footer-line { color: var(--brass); margin: 0.9rem 0 0; font-size: 0.78rem; letter-spacing: 0.1em; }
+        .built-by { color: var(--muted); transition: color 0.2s ease; }
+        .built-by:hover { color: var(--ink-soft); }
+        .built-by .bb-mark { color: var(--brass); }
+        .built-by:hover .bb-mark { color: var(--brass-hi); }
         .footer-cols { display: flex; flex-wrap: wrap; gap: 2.6rem; }
         .footer-col { display: grid; gap: 0.5rem; align-content: start; }
         .fc-label {
@@ -73,7 +84,7 @@ export default function Footer() {
           margin-bottom: 0.2rem;
         }
         .footer-col a { color: var(--ink-soft); font-size: 0.98rem; line-height: 1.45; }
-        .footer-col a:hover { color: var(--accent-hi); }
+        .footer-col a:hover { color: var(--brass-hi); }
         .footer-base {
           display: flex;
           justify-content: space-between;

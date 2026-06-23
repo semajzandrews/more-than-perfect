@@ -6,22 +6,16 @@ import Reveal from "./Reveal";
    used elsewhere; every tile here is distinct and matches its label. */
 const SHOTS = [
   {
-    src: "/images/interior.jpg",
-    alt: "A barber cutting a client inside More Than Perfect, mirrors and chairs down the wall",
-    tag: "The shop",
-    span: "tall",
-  },
-  {
     src: "/images/chair.jpg",
-    alt: "A client relaxed in the chair mid cut",
+    alt: "A client relaxed and front facing in the chair mid cut",
     tag: "In the chair",
-    span: "wide",
+    span: "tall",
   },
   {
     src: "/images/afro.jpg",
     alt: "Scissor and comb shaping a client's curls",
     tag: "Curls and afros",
-    span: "",
+    span: "wide",
   },
   {
     src: "/images/kids.jpg",
@@ -44,6 +38,12 @@ export default function Work() {
               Same block. Same chairs. Real cuts.
             </h2>
           </Reveal>
+          <Reveal delay={140}>
+            <p className="work-lede">
+              A South Orange chair for fathers, sons and everyone on the Avenue.
+              These are real cuts from a real shop.
+            </p>
+          </Reveal>
         </div>
 
         <div className="work-grid">
@@ -61,29 +61,31 @@ export default function Work() {
       <style>{`
         .work-head { margin-bottom: 2.4rem; display: grid; gap: 1rem; }
         .work-title { font-size: clamp(1.9rem, 5.5vw, 3.2rem); }
+        .work-lede { color: var(--ink-soft); max-width: 38rem; font-size: clamp(0.98rem, 2.4vw, 1.08rem); }
         .work-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr;
           gap: clamp(0.7rem, 2vw, 1.1rem);
         }
+        .work-cell { min-width: 0; }
         .work-fig {
           width: 100%;
-          height: 100%;
-          aspect-ratio: 1 / 1;
+          aspect-ratio: 4 / 3;
           border-radius: 3px;
         }
-        .work-cell.tall .work-fig { aspect-ratio: 3 / 4; }
-        .work-cell.wide .work-fig { aspect-ratio: 3 / 4; }
         @media (min-width: 760px) {
+          /* the front-facing chair shot anchors the left full height; the two
+             others stack on the right. Explicit rows so every cell has a real
+             height (no collapsed/empty tiles). */
           .work-grid {
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 1fr;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
           }
-          .work-cell.tall { grid-row: span 2; }
-          .work-cell.tall .work-fig { aspect-ratio: auto; }
-          .work-cell.wide { grid-column: span 2; }
-          .work-cell.wide .work-fig { aspect-ratio: 16 / 10; }
-          .work-cell .work-fig { aspect-ratio: 1 / 1; }
+          .work-cell.tall { grid-row: 1 / span 2; grid-column: 1; }
+          .work-cell.tall .work-fig { aspect-ratio: 3 / 4; height: 100%; }
+          .work-cell.wide { grid-column: 2; grid-row: 1; }
+          .work-cell:not(.tall):not(.wide) { grid-column: 2; grid-row: 2; }
+          .work-cell:not(.tall) .work-fig { aspect-ratio: 16 / 10; }
         }
       `}</style>
     </section>

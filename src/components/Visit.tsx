@@ -120,7 +120,7 @@ export default function Visit() {
           color: var(--ink);
           line-height: 1.4;
         }
-        a.vb-value:hover { color: var(--accent-hi); }
+        a.vb-value:hover { color: var(--brass-hi); }
         .hours { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
         .hours li {
           display: flex;
