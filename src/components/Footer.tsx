@@ -52,7 +52,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Built by <span className="bb-mark">bysemaj.com</span>
+          built <span className="bb-mark">bysemaj.com</span>
         </a>
       </div>
 
