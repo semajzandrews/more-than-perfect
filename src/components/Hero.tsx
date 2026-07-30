@@ -72,14 +72,13 @@ export default function Hero() {
 
         <Reveal delay={260}>
           <div className="hero-actions">
-            <a
-              href={BOOKSY}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("mtp:book"))}
               className="btn btn-primary"
             >
               Book the Chair
-            </a>
+            </button>
             <a href="#record" className="btn btn-ghost">
               See the record
             </a>

@@ -25,14 +25,13 @@ export default function Navigation() {
           <a href="#work">The Work</a>
           <a href="#visit">Visit</a>
         </nav>
-        <a
-          href={BOOKSY}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new CustomEvent("mtp:book"))}
           className="btn btn-primary nav-book"
         >
           Book the Chair
-        </a>
+        </button>
       </div>
     </header>
   );

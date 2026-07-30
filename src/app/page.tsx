@@ -8,6 +8,7 @@ import Services from "@/components/Services";
 import Work from "@/components/Work";
 import Visit from "@/components/Visit";
 import Footer from "@/components/Footer";
+import ChairCalendar from "@/components/ChairCalendar";
 
 export default function Page() {
   return (
@@ -23,6 +24,7 @@ export default function Page() {
         <Visit />
       </main>
       <Footer />
+      <ChairCalendar />
       <MobileBook />
     </>
   );

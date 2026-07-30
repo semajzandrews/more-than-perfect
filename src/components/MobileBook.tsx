@@ -12,14 +12,13 @@ export default function MobileBook() {
       <a href={`tel:${PHONE_TEL}`} className="mb-call" aria-label="Call the shop">
         Call
       </a>
-      <a
-        href={BOOKSY}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        type="button"
+        onClick={() => window.dispatchEvent(new CustomEvent("mtp:book"))}
         className="mb-book"
       >
         Book the Chair
-      </a>
+      </button>
       <style>{`
         .mobilebook {
           position: fixed;
