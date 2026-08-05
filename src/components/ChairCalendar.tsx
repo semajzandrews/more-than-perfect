@@ -28,24 +28,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { PHONE_DISPLAY, PHONE_TEL } from "./data";
+import { formatAsYouType, isCompletePhone, telHref } from "@/lib/phone";
+import { PHONE_DISPLAY, PHONE_DIGITS } from "./data";
 
 
-/**
- * US phone formatting + validation, shared behaviour across every build.
- * Progressively formats to (xxx) xxx-xxxx as the customer types, hard-caps at
- * 10 digits so nothing longer can be entered, and exposes a completeness check
- * the submit gate uses. Non-digits are dropped rather than rejected, so paste
- * of "973-555-0123" or "+1 973 555 0123" still lands correctly.
- */
-export function formatPhone(input: string): string {
-  const d = input.replace(/\D/g, "").replace(/^1(?=\d{10})/, "").slice(0, 10);
-  if (d.length === 0) return "";
-  if (d.length <= 3) return `(${d}`;
-  if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
-  return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
-}
-export const isPhoneComplete = (v: string) => v.replace(/\D/g, "").length === 10;
+/* The mask and the completeness gate come from the one phone module, so the
+   number a visitor types back matches the one the site shows them. This file
+   used to carry its own copy — exactly the drift the doctrine exists to stop. */
 
 const CUTS = [
   "Fades and tapers", "Edge ups", "Hot towel shaves",
@@ -125,7 +114,7 @@ export default function ChairCalendar() {
     return cells;
   }, [cursor, todayKey]);
 
-  const ready = !!dateKey && !!time && !!cut && !!name.trim() && isPhoneComplete(phone);
+  const ready = !!dateKey && !!time && !!cut && !!name.trim() && isCompletePhone(phone);
   function reset() { setDateKey(""); setBand(""); setTime(""); setCut(""); setName(""); setPhone(""); setDone(false); }
 
   const cell = (on: boolean, past: boolean) => ({
@@ -186,7 +175,7 @@ export default function ChairCalendar() {
                 </dl>
                 <p style={{ marginTop: 18, fontSize: 13.5, color: "var(--ink-soft)", lineHeight: 1.6 }}>
                   We&rsquo;ll text {phone} to confirm. Questions, call{" "}
-                  <a href={`tel:${PHONE_TEL}`} style={{ color: "var(--brass-hi)" }}>{PHONE_DISPLAY}</a>.
+                  <a href={telHref(PHONE_DIGITS)} style={{ color: "var(--brass-hi)" }}>{PHONE_DISPLAY}</a>.
                 </p>
                 <p style={{ marginTop: 16, display: "inline-block", padding: "8px 12px", border: "1px solid rgba(246,237,224,0.14)", fontSize: 11, color: "var(--muted)" }}>
                   Demo booking — nothing was charged.
@@ -263,7 +252,7 @@ export default function ChairCalendar() {
                   <section style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(190px,1fr))", gap: 10 }}>
                     <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" aria-label="Your name"
                       style={{ background: "transparent", border: "1px solid rgba(246,237,224,0.16)", padding: "11px 13px", fontSize: 15, color: "var(--ink)" }} />
-                    <input value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} inputMode="tel" maxLength={14} placeholder="(973) 000-0000" aria-label="Phone"
+                    <input value={phone} onChange={(e) => setPhone(formatAsYouType(e.target.value))} inputMode="tel" maxLength={14} placeholder="(973) 000-0000" aria-label="Phone"
                       style={{ background: "transparent", border: "1px solid rgba(246,237,224,0.16)", padding: "11px 13px", fontSize: 15, color: "var(--ink)" }} />
                   </section>
                 )}

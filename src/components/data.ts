@@ -1,11 +1,22 @@
 /* Verified facts only (recon 06-08-2026). Sources: Booksy listing 790040,
    ezlocal, directory aggregate. No fabricated names, prices, or socials. */
 
+import { formatPhone } from "@/lib/phone";
+
 export const BOOKSY =
   "https://booksy.com/en-us/790040_more-than-perfect_hair-salon_118492_south-orange-village";
 
-export const PHONE_DISPLAY = "(973) 763-5921";
-export const PHONE_TEL = "+19737635921";
+/* PHONE DOCTRINE — one digits-only constant, everything else derived from it,
+   so the display, the dialer link and the text link can never drift apart. */
+export const PHONE_DIGITS = "9737635921";
+export const PHONE_DISPLAY = formatPhone(PHONE_DIGITS); // (973) 763-5921
+
+/* The text branch of the CTA. A barbershop's hardest question to answer over
+   the counter is "can you do this?", so the prefill invites the reference photo
+   that settles it before anyone books a chair. */
+export const SMS_BODY =
+  "Hi More Than Perfect, here's a photo of the cut I want. When can you get me in the chair?";
+export const SMS_HINT = "Send a photo of the cut you want";
 
 export const ADDRESS = "131 South Orange Ave";
 export const CITY_STATE_ZIP = "South Orange, NJ 07079";

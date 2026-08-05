@@ -1,9 +1,8 @@
 import Reveal from "./Reveal";
+import CallOrText from "./CallOrText";
 import {
   ADDRESS,
   CITY_STATE_ZIP,
-  PHONE_DISPLAY,
-  PHONE_TEL,
   HOURS,
   BOOKSY,
   MAPS_EMBED,
@@ -23,7 +22,7 @@ export default function Visit() {
           <Reveal delay={140}>
             <p className="visit-sub">
               On South Orange Avenue, a walk from the train and the village. Book
-              the chair on Booksy or call and we will get you in.
+              the chair on Booksy, or call or text us and we will get you in.
             </p>
           </Reveal>
 
@@ -44,10 +43,8 @@ export default function Visit() {
           </Reveal>
           <Reveal delay={260}>
             <div className="visit-block">
-              <span className="vb-label mono">Call</span>
-              <a className="vb-value" href={`tel:${PHONE_TEL}`}>
-                {PHONE_DISPLAY}
-              </a>
+              <span className="vb-label mono">Call or text</span>
+              <CallOrText variant="board" />
             </div>
           </Reveal>
           <Reveal delay={320}>

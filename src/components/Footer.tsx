@@ -1,8 +1,10 @@
+import { telHref, smsHref } from "@/lib/phone";
 import {
   ADDRESS,
   CITY_STATE_ZIP,
   PHONE_DISPLAY,
-  PHONE_TEL,
+  PHONE_DIGITS,
+  SMS_BODY,
   BOOKSY,
   RATING,
   REVIEW_COUNT,
@@ -36,7 +38,8 @@ export default function Footer() {
           </div>
           <div className="footer-col">
             <span className="fc-label mono">Reach us</span>
-            <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+            <a href={telHref(PHONE_DIGITS)}>Call {PHONE_DISPLAY}</a>
+            <a href={smsHref(PHONE_DIGITS, SMS_BODY)}>Text {PHONE_DISPLAY}</a>
             <a href={BOOKSY} target="_blank" rel="noopener noreferrer">
               Book on Booksy
             </a>

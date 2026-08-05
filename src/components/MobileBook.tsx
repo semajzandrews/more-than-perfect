@@ -1,6 +1,6 @@
 "use client";
 
-import { BOOKSY, PHONE_TEL } from "./data";
+import CallOrText from "./CallOrText";
 
 export default function MobileBook() {
   return (
@@ -9,9 +9,9 @@ export default function MobileBook() {
       role="region"
       aria-label="Quick actions"
     >
-      <a href={`tel:${PHONE_TEL}`} className="mb-call" aria-label="Call the shop">
-        Call
-      </a>
+      {/* Call OR text: the bar's left slot opens the chooser upward so a
+          thumb never has to guess which one this shop answers. */}
+      <CallOrText variant="bar" label="Call / Text" className="mb-call" />
       <button
         type="button"
         onClick={() => window.dispatchEvent(new CustomEvent("mtp:book"))}
@@ -33,7 +33,10 @@ export default function MobileBook() {
           padding: 0.6rem;
           padding-bottom: calc(0.6rem + env(safe-area-inset-bottom));
         }
-        .mobilebook a {
+        /* scoped to direct children: the Call-or-Text panel lives inside this
+           bar and must NOT inherit the 52px full-width slot treatment */
+        .mobilebook > a,
+        .mobilebook > button {
           min-height: 52px;
           display: inline-flex;
           align-items: center;
@@ -44,7 +47,7 @@ export default function MobileBook() {
           text-transform: uppercase;
           border-radius: 2px;
         }
-        .mb-call { color: var(--ink); border: 1px solid var(--brass-border); margin-right: 0.5rem; }
+        .mb-call { margin-right: 0.5rem; }
         .mb-book {
           background: linear-gradient(180deg, var(--brass-hi), var(--brass) 55%, var(--brass-deep));
           color: var(--void); font-weight: 700;
